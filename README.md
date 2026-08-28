@@ -1,91 +1,191 @@
 # Assignment: Python Project Initialization
 
 ## Objective
-Your task is to initialize a Python project from scratch using modern tooling. You will create a virtual environment, add a specific dependency, write a simple script, format it, and use Git to submit your work. An automatic check will assess whether you completed this assignment properly.
 
+Your task is to initialize a Python project using modern tooling. You will create a virtual environment, add a specific dependency, write and format a simple script, and use Git to submit your work. An automatic check will assess whether you completed this assignment properly.
 
 > [!IMPORTANT]
-> **This assignment DOES NOT count towards your grade!.** 
-> It is only for you to get familiar with the workflow and tools we will be using throughout the course. Your code will automatically be checked for style, formatting, versioning, and proper types.
+> **This assignment does not count towards your grade.**
+> It is only for you to become familiar with the workflow and tools we will use throughout the course.
+> Your submission will be checked automatically for correct formatting and the exact NumPy version.
 
 ## Instructions
 
-### Part 1: Git and GitHub Setup
+### Part 1: Install the required tools
 
-1.  **Clone the repository:** Clone this repository to your local machine.
-    ```bash
-    git clone https://github.com/rug-oop-2526/assignment_0
-    cd assignment_0
-    ```
+You will use both Git (`git`) and the GitHub CLI (`gh`). Git manages the files and commits on your computer, while the GitHub CLI connects your terminal to GitHub.
 
-2.  **Create your GitHub repository:** Go to **[https://github.com/new](https://github.com/new)** and create a new repository. It does not matter if it's private or public. Do not initialize it with any files, i.e. select __No template__ and __Add README, Add .gitignore, Add license__ should be __off__. Then, copy its URL.
+If you do not already have a GitHub account, create one at [https://github.com/signup](https://github.com/signup) before continuing.
 
-3.  **Change the origin of your repository:** You cloned the repository from **[https://github.com/rug-oop-2526/assignment_0](https://github.com/rug-oop-2526/assignment_0)**, but now we want to use the new repository you just created. You can do so by:
-    ```bash
-    git remote set-url origin YOUR_NEW_REPO_URL
-    ```
+Feel free to skip anything you have already set up. For example, if Git is already installed, you do not need to install it again. If you are unsure, run the verification commands below and carefully read the messages printed in your terminal.
 
-### Part 2: Project Initialization
 
-1.  **Initialize the Project:** Use `uv` to create a `pyproject.toml` file and a virtual environment. This command sets up your project to use Python 3.12. This is done through:
-    ```bash
-    uv init --python 3.12
-    ```
+> [!IMPORTANT]
+> Use this ungraded assignment as an opportunity to become comfortable troubleshooting your own setup.
+> If you encounter a problem, read the error message, consult the linked documentation, and try to resolve it yourself.
+> Basic Git setup is expected knowledge for the rest of the course (and in many other courses!), so only limited support for Git installation and configuration will be available at later points.
 
-2.  **Add NumPy Dependency:** Add `numpy` version `1.26.0` and `mypy` to your project. This command will update `pyproject.toml` and install the packages into your `.venv`.
-    ```bash
-    uv add numpy==1.26.0 mypy
-    ```
 
-3. **Activate Virtual Environment:** Activate your virtual environment with:
-    ```bash
-    source .venv/bin/activate
-    ```
+#### macOS
 
-### Part 3: Code and Submission
-1.  **Write the Script:** Open the `main.py` file and add the following code:
-    ```python
-    import numpy as np
-    def add_two_integer_lists(a: list[int], b: list[str]) -> int:
-        arr=np.array(a)+np.array(b)
-        print(f"My added array: {arr}")
-    if __name__ == "__main__":
-        add_two_integer_lists([1,2,3],[4,5,6])
-    ```
+Install [Homebrew](https://brew.sh/) if you do not already have it, then run:
 
-2. **Note the Issues:** This code has multiple issues, namely.
-    - Formatting and missing whitespaces
-    - Incorrect type hints and return types
-    - Missing docstrings
-    - And so on... Could you try fixing them by yourself first?
-
-3. **Linters and Code Formatters:** 
-
-> [!TIP]
-> To automatically format your code, run:
->   ```bash
->   uvx ruff format
->   ```
-
-Do you see the difference?
-
-Now, run this command and try to fix all issues:
 ```bash
-uvx ruff check --select ALL --ignore T
+brew install git gh
 ```
 
-Lastly, check if your types were correct:
+#### Ubuntu or Debian Linux
+
 ```bash
-uvx mypy .
+sudo apt update
+sudo apt install git gh
 ```
 
-4.  **Commit and Push:** After you think you have resolved all issues with this code, stage all your changes, commit, and push.
-    ```bash
-    git add .
-    git commit -m "Complete project setup and add numpy script"
-    git push origin main
-    ```
+If your distribution does not provide `gh`, follow the [official GitHub CLI installation instructions](https://github.com/cli/cli/blob/trunk/docs/install_linux.md).
 
-5.  **Verify Checks:** Go to the "Actions" tab in your GitHub repository. Several workflows should be running. Wait for them to complete and ensure all checks pass with a green checkmark. If any checks fail, read the logs to debug the issue. The workflows verify code style, formatting, typing, and the exact version of NumPy. If all checks pass with a green mark, you have successfully completed this assignment.
+#### Windows
 
+Open PowerShell and install both tools with WinGet:
 
+```powershell
+winget install --id Git.Git -e
+winget install --id GitHub.cli -e
+```
+
+Open a new terminal after installation so that the commands are available. You can find other options on the [Git website](https://git-scm.com/downloads/win) and in the [GitHub CLI Windows instructions](https://github.com/cli/cli/blob/trunk/docs/install_windows.md).
+
+> [!NOTE]
+> We recommend using Linux for this course. The assignment can also be completed on Windows, but some commands (especially those related to Python and virtual environments) may differ depending on how Python is installed and which terminal you use.
+
+#### Verify Git and GitHub CLI
+
+```bash
+git --version
+gh --version
+gh auth login
+```
+
+Follow the prompts from `gh auth login` to log in to GitHub.
+
+#### Install uv
+
+Use the [official uv standalone installer](https://docs.astral.sh/uv/getting-started/installation/).
+
+On macOS or Linux, run:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+On Windows, open PowerShell and run:
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+Open a new terminal if the installer asks you to, then verify the installation:
+
+```bash
+uv --version
+```
+
+### Part 2: Git and GitHub setup
+
+1. **Create your own empty repository:** Create a new repository named `assignment_0` in your own GitHub account. The following command creates a private repository without cloning it:
+
+   ```bash
+   gh repo create assignment_0 --private
+   ```
+
+   You may replace `--private` with `--public` if you want the repository to be public.
+
+   Alternatively, create an empty repository at [https://github.com/new](https://github.com/new). Make sure the **Owner** field is your personal account. Select **No template** and leave **Add README**, **Add .gitignore**, and **Choose a license** off. Copy the URL of your new repository, but do not clone it yet.
+
+2. **Clone the assignment repository:** Clone exactly this course repository and enter its directory:
+
+   ```bash
+   git clone https://github.com/rug-oop-2526/assignment_0
+   cd assignment_0
+   ```
+
+3. **Change the remote origin:** The clone initially points to the course repository. Change `origin` so that commits are pushed to the empty repository in your own account. Replace `YOUR_GITHUB_USERNAME` with your GitHub username:
+
+   ```bash
+   git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/assignment_0.git
+   ```
+
+4. **Verify the remote:** Confirm that both URLs shown for `origin` point to the repository in your own account, not the course repository:
+
+   ```bash
+   git remote -v
+   ```
+
+### Part 3: Project initialization
+
+1. **Initialize the project:** Use `uv` to create the project files and configure the project for Python 3.12:
+
+   ```bash
+   uv init --python 3.12
+   ```
+
+2. **Add the NumPy dependency:** Add NumPy version `1.26.0`. This updates `pyproject.toml`, creates the `.venv` virtual environment, and installs the package:
+
+   ```bash
+   uv add numpy==1.26.0
+   ```
+
+3. **Activate the virtual environment:**
+
+   On macOS or Linux:
+
+   ```bash
+   source .venv/bin/activate
+   ```
+
+   On Windows PowerShell (this might differ depending on your setup):
+
+   ```powershell
+   .venv\Scripts\Activate.ps1
+   ```
+
+### Part 4: Code and submission
+
+1. **Write the script:** Open `main.py`, remove the code that is there, and add the following unformatted code:
+
+   ```python
+   import numpy as np
+   def add_two_integer_lists(a: list[int], b: list[int]) -> None:
+       arr=np.array(a)+np.array(b)
+       print(f"My added array: {arr}")
+   if __name__ == "__main__":
+       add_two_integer_lists([1,2,3],[4,5,6])
+   ```
+
+2. **Format the code:** The code has inconsistent spacing and missing blank lines. Automatically format it with Ruff:
+
+   ```bash
+   uvx ruff format
+   ```
+
+   Inspect `main.py` again and notice what changed.
+
+3. **Verify your work:** Run the following commands:
+
+   ```bash
+   uvx ruff format --check
+   uv run python -c "import numpy; print(numpy.__version__)"
+   ```
+
+   The formatting command must finish successfully, and the second command must print `1.26.0`. Resolve any failures before continuing.
+
+4. **Commit and push:** Stage your changes, commit them, and push them to your repository.
+
+   ```bash
+   git add .
+   git commit -m "Complete project setup and add numpy script"
+   git push origin main
+   ```
+
+5. **Inspect the automated checks on GitHub:** Open your repository on GitHub and go to the **Actions** tab. The formatting and NumPy-version workflows will start after you push. Wait for both workflows to finish and make sure they have green checkmarks.
+
+   If a workflow fails, open it and read its logs to determine what went wrong. Fix the problem locally, commit and push the correction, and inspect the new workflow run. Repeat this process until both automated checks pass.
