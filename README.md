@@ -74,8 +74,10 @@ Use the [official uv standalone installer](https://docs.astral.sh/uv/getting-sta
 On macOS or Linux, run:
 
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
+wget -qO- https://astral.sh/uv/install.sh | sh
 ```
+
+If you get a follow-up message to add `uv` to your source, do that as well.
 
 On Windows, open PowerShell and run:
 
