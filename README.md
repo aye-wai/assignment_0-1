@@ -101,10 +101,10 @@ uv --version
 
    Alternatively, create an empty repository at [https://github.com/new](https://github.com/new). Make sure the **Owner** field is your personal account. Select **No template** and leave **Add README**, **Add .gitignore**, and **Choose a license** off. Copy the URL of your new repository, but do not clone it yet.
 
-2. **Clone the assignment repository:** Clone exactly this course repository and enter its directory:
+2. **Clone the assignment repository:** Clone this repository and enter its directory:
 
    ```bash
-   git clone https://github.com/rug-oop-2526/assignment_0
+   git clone https://github.com/atodorov284/assignment_0
    cd assignment_0
    ```
 
