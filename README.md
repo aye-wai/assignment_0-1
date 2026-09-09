@@ -1,7 +1,7 @@
 # Assignment: Python Project Initialization
 
 ## Objective
-hi
+
 Your task is to initialize a Python project using modern tooling. You will create a virtual environment, add a specific dependency, write and format a simple script, and use Git to submit your work. An automatic check will assess whether you completed this assignment properly.
 
 > [!IMPORTANT]
